@@ -19,16 +19,16 @@ const initialState = {
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
-    case OPEN_MENU:
-        return Object.assign({}, state, {
-            [action.menu]: true
-        });
-    case CLOSE_MENU:
-        return Object.assign({}, state, {
-            [action.menu]: false
-        });
-    default:
-        return state;
+        case OPEN_MENU:
+            return Object.assign({}, state, {
+                [action.menu]: true
+            });
+        case CLOSE_MENU:
+            return Object.assign({}, state, {
+                [action.menu]: false
+            });
+        default:
+            return state;
     }
 };
 const openMenu = menu => ({
