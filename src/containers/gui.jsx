@@ -129,7 +129,7 @@ GUI.defaultProps = {
 const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     const loginState = state.scratchGui.userState.loginState;
-    // console.log(getIsLogined(loginState))
+    // console.log(state.scratchGui)
     return {
         activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
         alertsVisible: state.scratchGui.alerts.visible,
@@ -147,6 +147,7 @@ const mapStateToProps = state => {
         isShowingProject: getIsShowingProject(loadingState),
         loadingStateVisible: state.scratchGui.modals.loadingProject,
         projectId: state.scratchGui.projectState.projectId,
+        showLoginModal: state.scratchGui.modals.login,
         soundsTabVisible: state.scratchGui.editorTab.activeTabIndex === SOUNDS_TAB_INDEX,
         targetIsStage: (
             state.scratchGui.targets.stage &&

@@ -4,9 +4,9 @@ import React from 'react';
 
 import DeleteButton from '../delete-button/delete-button.jsx';
 import styles from './sprite-selector-item.css';
-import {ContextMenuTrigger} from 'react-contextmenu';
-import {DangerousMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
-import {FormattedMessage} from 'react-intl';
+import { ContextMenuTrigger } from 'react-contextmenu';
+import { DangerousMenuItem, ContextMenu, MenuItem } from '../context-menu/context-menu.jsx';
+import { FormattedMessage } from 'react-intl';
 
 // react-contextmenu requires unique id to match trigger and context menu
 let contextMenuId = 0;
@@ -52,7 +52,7 @@ const SpriteSelectorItem = props => (
                 className={styles.deleteButton}
                 onClick={props.onDeleteButtonClick}
             />
-        ) : null }
+        ) : null}
         {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (
@@ -72,7 +72,7 @@ const SpriteSelectorItem = props => (
                             id="gui.spriteSelectorItem.contextMenuExport"
                         />
                     </MenuItem>
-                ) : null }
+                ) : null}
                 {props.onDeleteButtonClick ? (
                     <DangerousMenuItem onClick={props.onDeleteButtonClick}>
                         <FormattedMessage
@@ -81,7 +81,7 @@ const SpriteSelectorItem = props => (
                             id="gui.spriteSelectorItem.contextMenuDelete"
                         />
                     </DangerousMenuItem>
-                ) : null }
+                ) : null}
             </ContextMenu>
         ) : null}
     </ContextMenuTrigger>

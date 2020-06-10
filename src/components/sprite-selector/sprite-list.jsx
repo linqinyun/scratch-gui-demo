@@ -50,8 +50,8 @@ const SpriteList = function (props) {
                     // If the sprite has just received a block drop, used for green highlight
                     const receivedBlocks = (
                         hoveredTarget.sprite === sprite.id &&
-                    sprite.id !== editingTarget &&
-                    hoveredTarget.receivedBlocks
+                        sprite.id !== editingTarget &&
+                        hoveredTarget.receivedBlocks
                     );
 
                     // If the sprite is indicating it can receive block dropping, used for blue highlight
@@ -71,7 +71,8 @@ const SpriteList = function (props) {
                     return (
                         <SortableAsset
                             className={classNames(styles.spriteWrapper, {
-                                [styles.placeholder]: isSpriteDrag && index === draggingIndex})}
+                                [styles.placeholder]: isSpriteDrag && index === draggingIndex
+                            })}
                             index={isSpriteDrag ? ordering.indexOf(index) : index}
                             key={sprite.name}
                             onAddSortable={onAddSortable}

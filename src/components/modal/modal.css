@@ -23,7 +23,8 @@
     padding: 0;
     border-radius: $space;
     user-select: none;
-
+    background-position: 0 1.5rem;
+    background-color:white;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: $text-primary;
     overflow: hidden;

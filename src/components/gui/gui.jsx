@@ -39,7 +39,7 @@ import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
-
+import LoginModal from '../login/login.jsx'
 const messages = defineMessages({
     addExtension: {
         id: 'gui.gui.addExtension',
@@ -54,6 +54,7 @@ let isRendererSupported = null;
 
 const GUIComponent = props => {
     const {
+        showLoginModal,
         accountNavOpen,
         activeTabIndex,
         alertsVisible,
@@ -159,6 +160,10 @@ const GUIComponent = props => {
                     dir={isRtl ? 'rtl' : 'ltr'}
                     {...componentProps}
                 >
+                    {showLoginModal ? (
+                        <LoginModal title='登录' />
+                    ) : null}
+
                     {telemetryModalVisible ? (
                         <TelemetryModal
                             onCancel={onTelemetryModalCancel}
@@ -331,9 +336,10 @@ const GUIComponent = props => {
                                         {soundsTabVisible ? <SoundTab vm={vm} /> : null}
                                     </TabPanel>
                                 </Tabs>
-                                {backpackVisible ? (
+                                {/* <Backpack host={backpackHost} /> */}
+                                {/* {backpackVisible ? (
                                     <Backpack host={backpackHost} />
-                                ) : null}
+                                ) : null} */}
                             </Box>
 
                             <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
@@ -414,6 +420,7 @@ GUIComponent.propTypes = {
     onToggleLoginOpen: PropTypes.func,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
+    showLoginModal: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     targetIsStage: PropTypes.bool,
@@ -439,6 +446,7 @@ GUIComponent.defaultProps = {
     isShared: false,
     loading: false,
     showComingSoon: false,
+    showLoginModal: false,
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 

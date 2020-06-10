@@ -13,7 +13,7 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import CommunityButton from './community-button.jsx';
 import ShareButton from './share-button.jsx';
-import LoginButton from './login-button.jsx'
+// import LoginButton from './login-button.jsx'
 import { ComingSoonTooltip } from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
@@ -31,7 +31,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
-import { openTipsLibrary } from '../../reducers/modals';
+// import { openTipsLibrary } from '../../reducers/modals';
 import { setPlayer } from '../../reducers/mode';
 
 import {
@@ -76,7 +76,8 @@ import aboutIcon from './icon--about.svg';
 import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
-
+import { openTipsLibrary, openLoginModal, closeLoginModal } from '../../reducers/modals';
+import LoginButton from './login-button.jsx';
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -504,7 +505,7 @@ class MenuBar extends React.Component {
                         <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    {this.props.canEditTitle ? (
+                    {/* {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
                                 enable
@@ -523,59 +524,9 @@ class MenuBar extends React.Component {
                             userId={this.props.authorId}
                             username={this.props.authorUsername}
                         />
-                    ) : null)}
-                    <div className={classNames(styles.menuBarItem)}>
-                        {this.props.canShare ? (
-                            (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
-                                    {
-                                        waitForUpdate => (
-                                            <ShareButton
-                                                className={styles.menuBarButton}
-                                                isShared={this.props.isShared}
-                                                /* eslint-disable react/jsx-no-bind */
-                                                onClick={() => {
-                                                    this.handleClickShare(waitForUpdate);
-                                                }}
-                                            /* eslint-enable react/jsx-no-bind */
-                                            />
-                                        )
-                                    }
-                                </ProjectWatcher>
-                            )
-                        ) : (
-                                this.props.showComingSoon ? (
-                                    <MenuBarItemTooltip id="share-button">
-                                        <ShareButton className={styles.menuBarButton} />
-                                    </MenuBarItemTooltip>
-                                ) : []
-                            )}
-                        {this.props.canRemix ? remixButton : []}
-                    </div>
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ? (
-                            (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
-                                    {
-                                        waitForUpdate => (
-                                            <CommunityButton
-                                                className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
-                                                onClick={() => {
-                                                    this.handleClickSeeCommunity(waitForUpdate);
-                                                }}
-                                            /* eslint-enable react/jsx-no-bind */
-                                            />
-                                        )
-                                    }
-                                </ProjectWatcher>
-                            )
-                        ) : (this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : [])}
-                    </div>
+                    ) : null)} */}
+
+
                 </div>
 
                 {/* show the proper UI in the account menu, given whether the user is
@@ -586,12 +537,8 @@ class MenuBar extends React.Component {
                             <SaveStatus />
                         )}
                     </div>
-                    {this.props.loginState ? (
+                    {/* {this.props.loginState ? (
                         <React.Fragment>
-                            {/* <MenuBarItemTooltip
-                                id="account-nav"
-                                place={this.props.isRtl ? 'right' : 'left'}
-                            > */}
                             <div
                                 className={classNames(
                                     styles.menuBarItem,
@@ -611,13 +558,15 @@ class MenuBar extends React.Component {
                                     src={dropdownCaret}
                                 />
                             </div>
-                            {/* </MenuBarItemTooltip> */}
                         </React.Fragment>
                     ) : (
                             <React.Fragment>
-                                <LoginButton />
+                                <LoginButton
+                                    className={styles.menuBarButton}
+                                    onClick={this.props.onClickloginon}
+                                />
                             </React.Fragment>
-                        )}
+                        )} */}
                     {/* 未登录 */}
                     {/* <React.Fragment>
                         <MenuBarItemTooltip
@@ -715,7 +664,9 @@ MenuBar.propTypes = {
     userOwnsProject: PropTypes.bool,
     username: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired,
-    loginState: PropTypes.bool
+    loginState: PropTypes.bool,
+    onClickloginon: PropTypes.func,
+    onCancel: PropTypes.func.isRequired
 };
 
 MenuBar.defaultProps = {
@@ -745,7 +696,7 @@ const mapStateToProps = (state, ownProps) => {
         vm: state.scratchGui.vm
     };
 };
-
+// console.log(openLoginModal())
 const mapDispatchToProps = dispatch => ({
     autoUpdateProject: () => dispatch(autoUpdateProject()),
     onOpenTipLibrary: () => dispatch(openTipsLibrary()),
@@ -763,7 +714,9 @@ const mapDispatchToProps = dispatch => ({
     onClickRemix: () => dispatch(remixProject()),
     onClickSave: () => dispatch(manualUpdateProject()),
     onClickSaveAsCopy: () => dispatch(saveProjectAsCopy()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onClickloginon: () => dispatch(openLoginModal()),
+    onCancel: () => dispatch(closeLoginModal())
 });
 
 export default compose(
